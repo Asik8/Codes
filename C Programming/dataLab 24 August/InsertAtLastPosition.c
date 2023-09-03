@@ -24,6 +24,13 @@ void insertAtLast()
     newNode ->data =data;
     newNode ->next =NULL;
     node *p = head;
+
+    if(head == NULL)
+    {
+        insertAtLast();
+        return;
+    }
+
     while (p ->next!=NULL)
     {
         p = p ->next;
@@ -55,10 +62,10 @@ int main()
 {
     insertAtLast();
     printedLinkedList();
-    insertAtLast();
-    printedLinkedList();
-    insertAtLast();
-    printedLinkedList();
+    // insertAtLast();
+    // printedLinkedList();
+    // insertAtLast();
+    // printedLinkedList();
    
     return 0;
 }
