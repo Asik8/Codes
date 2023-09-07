@@ -49,7 +49,7 @@ int main()
     insertAtFirst();
     printedLinkedList();
     insertAtFirst();
-    printedLinkedList();3
+    printedLinkedList();
     insertAtFirst();
     printedLinkedList();
    
