@@ -1,5 +1,19 @@
+/*
+Next class assessment topics:
+Insert at First position
+Insert at Any position
+Insert at Last position
+Delete at First position
+Delete at Any position
+Delete at Last position
+Print function to print all the elements of that node;
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
+
+
 struct Node
 {
     int data;
@@ -7,6 +21,7 @@ struct Node
 };
 typedef struct Node node;
 node *head = NULL;
+
 
 void insertAtFirst()
 {
@@ -62,12 +77,6 @@ void insertAtLast()
     newNode = (node *)malloc(sizeof(node));
     newNode->data = data;
     newNode->next = NULL;
-
-    if(head == NULL)
-    {
-
-    }
-
 }
 
 void print_linked_list()
@@ -82,19 +91,47 @@ void print_linked_list()
     }
     printf("\n");
 }
+ 
 
 void deleteFirst()
 {
     printf("Deleting First Node\n");
     node *ptr = head;
     head = ptr ->next;
-
 }
+
+
+void deleteLast()
+{
+    node *ptr = head;
+    if(ptr->next == NULL)
+    {
+        printf("There is only one node\n");
+        deleteFirst();
+        return;
+    }
+    while(ptr ->next->next != NULL)
+    {
+        ptr = ptr->next;
+    }
+    ptr ->next == NULL;
+}
+
 
 int main()
 {
     insertAtFirst();
     insertAnyPosition();
+    insertAnyPosition();
+    insertAnyPosition();
+    insertAtLast();
+
+    print_linked_list();
+
+    deleteFirst();
+    print_linked_list();
+    
+    deleteLast();
     print_linked_list();
     return 0;
 }
