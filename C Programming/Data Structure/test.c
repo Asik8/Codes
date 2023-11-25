@@ -1,220 +1,55 @@
-/*
-Next class assessment topics:
-Insert at First position
-Insert at Any position
-Insert at Last position
-Delete at First position
-Delete at Any position
-Delete at Last position
-Print function to print all the elements of that node;
-*/
-
-
 #include <stdio.h>
 #include <stdlib.h>
-
 
 struct Node
 {
     int data;
-    struct Node *next;
+    struct Node* left;
+    struct Node* right;
 };
-typedef struct Node node;
-node *head = NULL;
 
-
-void insertAtFirst()
+struct Node* createNewNode(int data)
 {
-    int data;
-    scanf("%d",&data);
-
-    node *newNode;
-    newNode = (node *)malloc(sizeof(node));
+    struct Node* newNode = (struct Node *)malloc(sizeof(struct Node));
     newNode->data = data;
-    newNode->next = head;
-    head = newNode;
+    newNode->left = newNode->right = NULL;
+    return newNode;
 }
 
-
-void insertAnyPosition()
+void PrintTree(struct Node* root)
 {
-    printf("Insert a data inside of a node at any position\n");
-    if(head == NULL)
+    if(root == NULL)
     {
-        insertAtFirst();
-        return;
-    }
-    int key;
-    printf("Where you want to insert the node\n");
-    scanf("%d",&key);
-    node *ptr = head;
-    while(ptr ->next!=NULL && ptr->data!=key)
-    {
-        ptr = ptr->next;
-    }
-    node *newNode;
-    newNode = (node*) malloc(sizeof(node));
-    int data;
-    printf("Enter the data Item\n");
-    scanf("%d",&data);
-    newNode->data = data;
-    newNode->next = ptr->next;
-    ptr ->next = newNode;
-}
-
-// void insertAnyPosition()
-// {
-//     printf("Insert a data inside of a node at any position\n");
-//     int data;
-//     printf("Enter the data item: ");
-//     scanf("%d", &data);
-
-//     node *newNode;
-//     newNode = (node *)malloc(sizeof(node));
-//     newNode->data = data;
-
-//     int position;
-//     printf("Enter the position where you want to insert the node: ");
-//     scanf("%d", &position);
-
-//     if (position == 1) {
-//         newNode->next = head;
-//         head = newNode;
-//     } else {
-//         node *ptr = head;
-//         int currentPos = 1;
-
-//         while (ptr != NULL && currentPos < position - 1) {
-//             ptr = ptr->next;
-//             currentPos++;
-//         }
-
-//         if (ptr == NULL) {
-//             printf("Invalid position. Node can't be inserted.\n");
-//             free(newNode); // Free the allocated memory since insertion failed.
-//             return;
-//         }
-
-//         newNode->next = ptr->next;
-//         ptr->next = newNode;
-//     }
-// }
-
-
-// void insertAtLast()
-// {
-//     if (head == NULL)
-//     {
-//         insertAtFirst();
-//         return;
-//     }
-
-//     int data;
-//     scanf("%d",&data);
-
-//     node *newNode;
-//     newNode = (node *)malloc(sizeof(node));
-//     newNode->data = data;
-//     newNode->next = NULL;
-// }
-
-
-void insertAtLast()
-{
-    if (head == NULL)
-    {
-        insertAtFirst();
         return;
     }
 
-    int data;
-    scanf("%d", &data);
+    // In Order
+    PrintTree(root->left);
+    printf("%d ",root->data);
+    PrintTree(root->right);
 
-    node *newNode;
-    newNode = (node *)malloc(sizeof(node));
-    newNode->data = data;
-    newNode->next = NULL;
+    // Pre Order 
+    // printf("%d ",root->data);
+    // PrintTree(root->left);
+    // PrintTree(root->right);
 
-    node *ptr = head;
-    while (ptr->next != NULL)
-    {
-        ptr = ptr->next;
-    }
-    ptr->next = newNode;
+    // Post Order 
+    // PrintTree(root->left);
+    // PrintTree(root->right);
+    // printf("%d ",root->data);
 }
-
-
-void print_linked_list()
-{
-    printf("The Linked List: ");
-    node *ptr=head;
-
-    while(ptr!=NULL)
-    {
-        printf("%d ",ptr->data);
-        ptr=ptr->next;
-    }
-    printf("\n");
-}
- 
-
-void deleteFirst()
-{
-    printf("Deleting First Node\n");
-    node *ptr = head;
-    head = ptr ->next;
-}
-
-
-// void deleteLast()
-// {
-//     node *ptr = head;
-//     if(ptr->next == NULL)
-//     {
-//         printf("There is only one node\n");
-//         deleteFirst();
-//         return;
-//     }
-//     while(ptr ->next->next != NULL)
-//     {
-//         ptr = ptr->next;
-//     }
-//     ptr ->next == NULL;
-// }
-
-void deleteLast()
-{
-    node *ptr = head;
-    if (ptr->next == NULL)
-    {
-        printf("There is only one node\n");
-        deleteFirst();
-        return;
-    }
-    while (ptr->next->next != NULL)
-    {
-        ptr = ptr->next;
-    }
-    free(ptr->next);
-    ptr->next = NULL;
-}
-
-
 
 int main()
 {
-    insertAtFirst();
-    insertAnyPosition();
-    insertAnyPosition();
-    insertAnyPosition();
-    insertAtLast();
+    struct Node* root = createNewNode(5);
+    root->left = createNewNode(2);
+    root ->left->left = createNewNode(3);
+    root ->left->right = createNewNode(9);
+    root->right = createNewNode(7);
+    root->right->right = createNewNode(1);
+    root->right->right->right = createNewNode(4);
 
-    print_linked_list();
-
-    deleteFirst();
-    print_linked_list();
-    
-    deleteLast();
-    print_linked_list();
-    return 0;
+    printf("Created Link List is:\n");
+    PrintTree(root);
+    printf("\n");
 }

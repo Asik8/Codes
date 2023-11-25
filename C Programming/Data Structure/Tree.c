@@ -16,7 +16,7 @@ struct Node* createNode(int data)
     return newNode;
 }
 
-// Function to perform an in-order traversal and print the tree
+// Function to print the tree
 void printTree(struct Node* root)
 {
     if (root == NULL)

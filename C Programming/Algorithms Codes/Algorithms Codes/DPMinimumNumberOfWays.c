@@ -16,7 +16,7 @@ int main() {
     scanf("%d", &amount);
 
     for (int i = 0; i <= n; i++) {
-        dp[i][0] = 1;  // Initialize only when no coins are used
+        dp[i][0] = 1; 
     }
 
     for (int i = 1; i <= n; i++) {
