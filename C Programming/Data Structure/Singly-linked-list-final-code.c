@@ -101,11 +101,6 @@ void deleteLast()
     ptr->next = NULL;
 }
 
-void deleteAnyPosition()
-{
-
-}
-
 void printList()
 {
     printf("The Linked List: ");

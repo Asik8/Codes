@@ -10,11 +10,6 @@ struct MinHeap {
 
 struct Compare {
     int (*compareFunction)(const struct MinHeap *, const struct MinHeap *);
-
-    // Constructor to initialize the function pointer
-    Compare(int (*compare)(const struct MinHeap *, const struct MinHeap *)) {
-        compareFunction = compare;
-    }
 };
 
 int compareMinHeap(const struct MinHeap *l, const struct MinHeap *r) {
@@ -29,7 +24,7 @@ struct MinHeap *newMinHeapNode(char data, unsigned freq) {
     return temp;
 }
 
-void printCodes(struct MinHeap *root, char *str, int top) {
+void printCodes(struct MinHeap *root, char *str, int top, struct Compare compare) {
     if (!root)
         return;
 
@@ -38,12 +33,12 @@ void printCodes(struct MinHeap *root, char *str, int top) {
     }
 
     str[top] = '0';
-    printCodes(root->left, str, top + 1);
+    printCodes(root->left, str, top + 1, compare);
     str[top] = '1';
-    printCodes(root->right, str, top + 1);
+    printCodes(root->right, str, top + 1, compare);
 }
 
-void HuffmanCodes(char data[], int freq[], int size) {
+void HuffmanCodes(char data[], int freq[], int size, struct Compare compare) {
     struct MinHeap *left, *right, *top;
 
     struct MinHeap **minHeapArray = (struct MinHeap **)malloc(size * sizeof(struct MinHeap *));
@@ -52,7 +47,6 @@ void HuffmanCodes(char data[], int freq[], int size) {
         minHeapArray[i] = newMinHeapNode(data[i], freq[i]);
     }
 
-    struct Compare compare(&compareMinHeap);
     int heapSize = size;
 
     while (heapSize != 1) {
@@ -71,7 +65,7 @@ void HuffmanCodes(char data[], int freq[], int size) {
     }
 
     char str[size];
-    printCodes(minHeapArray[0], str, 0);
+    printCodes(minHeapArray[0], str, 0, compare);
 
     free(minHeapArray);
 }
@@ -81,7 +75,8 @@ int main() {
     int freq[] = {5, 9, 12, 13, 16, 45};
     int size = sizeof(arr) / sizeof(arr[0]);
 
-    HuffmanCodes(arr, freq, size);
+    struct Compare compare = {&compareMinHeap};
+    HuffmanCodes(arr, freq, size, compare);
 
     return 0;
 }

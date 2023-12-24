@@ -4,7 +4,7 @@
 // #include<string.h>
 
 // int max(int a, int b);
- // Returns length of LCS for X[0..m-1],
+// Returns length of LCS for X[0..m-1],
 // // Y[0..n-1]
 // int lcs(char* X, char* Y, int i, int j)
 // {
@@ -36,34 +36,40 @@
 // 	return 0;
 // }
 
-
 #include <stdio.h>
 #include <string.h>
 
-int main() {
+int main()
+{
     char S1[] = "MEHEDI";
     char S2[] = "MATI";
     int m = strlen(S1);
     int n = strlen(S2);
-    int dp[m + 1][n + 1];
+    int lcs[m + 1][n + 1];
     int i, j;
 
-    // Initializing the dp array
-    for (i = 0; i <= m; i++) {
-        for (j = 0; j <= n; j++) {
-            if (i == 0 || j == 0) {
-                dp[i][j] = 0;
-            } else if (S1[i ] == S2[j ]) {
-                dp[i][j] = 1 + dp[i - 1][j - 1];
-            } else {
-                dp[i][j] = (dp[i][j - 1] > dp[i - 1][j]) ? dp[i][j - 1] : dp[i - 1][j];
+    // Initializing the lcs array
+    for (i = 0; i <= m; i++)
+    {
+        for (j = 0; j <= n; j++)
+        {
+            if (i == 0 || j == 0)
+            {
+                lcs[i][j] = 0;
+            }
+            else if (S1[i] == S2[j])
+            {
+                lcs[i][j] = 1 + lcs[i - 1][j - 1];
+            }
+            else
+            {
+                lcs[i][j] = (lcs[i][j - 1] > lcs[i - 1][j]) ? lcs[i][j - 1] : lcs[i - 1][j];
             }
         }
     }
 
-    // Length of LCS is stored in dp[m][n]
-    printf("Length of LCS is %d", dp[m][n]);
+    // Length of LCS is stored in lcs[m][n]
+    printf("Length of LCS is %d", lcs[m][n]);
 
     return 0;
 }
- 
