@@ -8,7 +8,6 @@ struct Node
 };
 typedef struct Node node;
 node *head = NULL;
-
 void insertFirst()
 {
     int n;
@@ -18,29 +17,6 @@ void insertFirst()
     newNode->data = n;
     newNode->next = head;
     head = newNode;
-}
-
-void insertLast()
-{
-    if (head == NULL)
-    {
-        insertFirst();
-        return;
-    }
-
-    int n;
-    scanf("%d",&n);
-
-    node *ptr = head;
-    while (ptr->next->next != NULL)
-    {
-        ptr = ptr->next;
-    }
-
-    node *newNode = (node *)malloc(sizeof(node));
-    newNode->data = n;
-    newNode->next = NULL;
-    ptr->next->next = newNode;
 }
 
 void insertAnyPosition()
@@ -70,6 +46,29 @@ void insertAnyPosition()
     newNode->data = n;
     newNode->next = ptr->next;
     ptr->next = newNode;
+}
+
+void insertLast()
+{
+    if (head == NULL)
+    {
+        insertFirst();
+        return;
+    }
+
+    int n;
+    scanf("%d",&n);
+
+    node *ptr = head;
+    while (ptr->next->next != NULL)
+    {
+        ptr = ptr->next;
+    }
+
+    node *newNode = (node *)malloc(sizeof(node));
+    newNode->data = n;
+    newNode->next = NULL;
+    ptr->next->next = newNode;
 }
 
 void deleteFirst()
