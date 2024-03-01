@@ -15,18 +15,21 @@ int main()
             scanf("%d",&ar[j]);
         }
 
-        int cont =0;
+        int odd =0,even = 0;
 
-        for(int j=0;j<a*2;j+=2)
+        for(int j=0;j<a*2;j++)
         {
-            if((ar[j]+ar[j+1])%2==0)
+            if((ar[j])%2==0)
             {
-                cont++;
-                break;
+                even++;
+            }
+            else
+            {
+                odd++;
             }
         }
 
-        if(cont>0)
+        if(odd !=even)
         {
             printf("NO\n");
         }
