@@ -1,39 +1,44 @@
 #include <stdio.h>
 #include <math.h>
+#define max_num 1000000
 
 int main()
 {
     long long int t;
-    scanf("%lld",&t);
-    long long int a[t];
+    scanf("%lld", &t);
+    char a[max_num+1] = {0};
+    a[0] = a[1] = 1;
+
+    // Using Sieve of Eratosthenes Algorithms
+    for (long long int i = 2; i*i <= max_num; i++)
+    {
+        if (a[i] == 0)
+        {
+            for (long long int j = 2; i*j <= max_num; j++)
+            {
+                a[i * j] = 1;
+            }
+        }
+    }
 
     for (long long int j = 0; j < t; j++)
     {
-        scanf("%lld",&a[j]);
-        long long int s = sqrt(a[j]);
-        long long int c=0,c2=0;
-        if (s <= 1)
+        long long int num;
+        scanf("%lld", &num);
+        long long int s = sqrt(num);
+
+        if (num < 4)
         {
             printf("NO\n");
-            c++;
-            c2++;
         }
+
         else
         {
-            for (long long int i = 2; i <= sqrt(s); i++)
-            {
-                if (s % i == 0 && c==0 && c2==0)
-                {
-                    printf("NO\n");
-                    c++;
-                    c2++;
-                }
-            }
-            if (s * s == a[j] && c==0)
+            if (s * s == num && a[s] == 0)
             {
                 printf("YES\n");
             }
-            else if(c2==0)
+            else
             {
                 printf("NO\n");
             }
