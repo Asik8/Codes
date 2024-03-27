@@ -11,9 +11,10 @@ for i in a:
 for i in b:
     index = bisect_right(cumulative_sum,i)-1
     if index == 0:
-        print(index+1,i)
+        print(1,i)
+        
+    elif cumulative_sum[index] == i:
+        print(index,i-cumulative_sum[index-1])
+        
     else:
         print(index+1,i-cumulative_sum[index])
-
-
-
